@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=zwave-js
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=11.13.1
+PKG_VERSION:=12.2.3
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=f1f373fc6495cc195da65a60e1fdcf5d6b636bf965e72d286fd05b2d59285910
+PKG_HASH:=8a7a4241906b5a73f33b624f5a4cd347ec58b77813910e49019af88e236bf3e4
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT
@@ -58,6 +58,9 @@ define Build/Compile
 	rm -f $(PKG_BUILD_DIR)/node_modules/.package-lock.json
 	find $(PKG_BUILD_DIR)/node_modules -type d -empty -print0 | xargs -0 rmdir || true
 	rm -rf $(PKG_BUILD_DIR)/node_modules/serialport/node_modules/@serialport/bindings-cpp/prebuilds
+	rm -rf $(PKG_BUILD_DIR)/node_modules/@zwave-js/core/node_modules/moment/min
+	rm -rf $(PKG_BUILD_DIR)/node_modules/@zwave-js/core/node_modules/moment/src
+	rm -rf $(PKG_BUILD_DIR)/node_modules/@zwave-js/core/node_modules/moment/locale
 endef
 
 define Package/node-zwave-js/install
